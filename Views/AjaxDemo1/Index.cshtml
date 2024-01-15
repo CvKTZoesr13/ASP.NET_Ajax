@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Simple calculator</h2>
+<h2>Sum</h2>
+
+<label for="a">Number 1:</label><input id="a"/><br />
+<label for="b">Number 2:</label><input id="b"/><br />
+<input type="button" id="btn" value="Sum" />
+<br />
+<div id="result" style="font-size: large"></div>
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+
+<script>
+    $(document).ready(() => {
+        $("#btn").click(() => {
+            var a = $("#a").val()
+            var b = $("#b").val()
+            $.ajax({
+                url: '/AjaxDemo1/Math?a=' + a + '&b=' + b,
+                success: (data) => {
+                    if (data.status == "ok") {
+                        $("#result").html(data.result)
+                    } else {
+                        $("#result").html("Something went wrong!")
+                    }
+                }
+                })
+        })
+    })
+</script>
